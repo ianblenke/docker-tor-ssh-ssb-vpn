@@ -1,5 +1,4 @@
 #!/bin/bash
-grep . /var/lib/tor/*/hostname
 
 default_gw="$(netstat -rn | grep -e '^0.0.0.0' | awk '{print $2}')"
 
@@ -22,4 +21,12 @@ SafeLogging 0
 Log notice stdout
 EOF
 
-exec tor $@
+echo "Configuration:"
+grep -v -e '^#\|^$' /etc/tor/torrc /etc/torrc.d/*
+
+echo 'Onion Hostname:'
+grep . /var/lib/tor/*/hostname
+
+chown -R tor /var/lib/tor
+chmod 1777 /var/lib/tor
+exec su tor -c "exec tor $@"

@@ -13,6 +13,10 @@ RUN echo "deb https://deb.torproject.org/torproject.org stretch main" > /etc/apt
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+RUN useradd -d /home/tor -m tor \
+ && chown -R tor /var/lib/tor \
+ && chmod 1777 /var/lib/tor
+
 ADD run.sh /run.sh
 
 EXPOSE 9050

@@ -11,14 +11,18 @@ services:
     build: .
     image: sofwerx/tor
     container_name: tor
-# Comment out the `network_mode: host` line if you want to ssh into your docker-engine host itself.
-# Uncomment the `network_mode: host` line if your docker-engine host is a VM and you wish to ssh into the VM's default route.
+## Comment out the `network_mode: host` line if you want to ssh into your docker-engine host itself.
+## Uncomment the `network_mode: host` line if your docker-engine host is a VM and you wish to ssh into the VM's default route.
 #    network_mode: host
     volumes:
       - tor-data:/var/lib/tor
     ports:
       - 127.0.0.1:9050:9050
     restart: always
+## Alternatively, uncomment these and point them at the host IP you wish to ssh into
+#    environment:
+#      ssh_host_ip: 172.18.0.1
+#      ssh_host_port: 22
     logging:
       driver: "json-file"
       options:
