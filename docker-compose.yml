@@ -1,0 +1,29 @@
+version: '2'
+
+volumes:
+
+  tor-data:
+    driver: local
+
+services:
+
+  tor:
+    build: .
+    image: sofwerx/tor
+    container_name: tor
+# Comment out the `network_mode: host` line if you want to ssh into your docker-engine host itself.
+# Uncomment the `network_mode: host` line if your docker-engine host is a VM and you wish to ssh into the VM's default route.
+#    network_mode: host
+    volumes:
+      - tor-data:/var/lib/tor
+    ports:
+      - 127.0.0.1:9050:9050
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 1m
+        max-file: "1"
+        labels: tor
+        env: debian
+    
