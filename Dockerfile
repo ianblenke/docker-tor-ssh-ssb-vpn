@@ -6,7 +6,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN echo "deb https://deb.torproject.org/torproject.org stretch main" > /etc/apt/sources.list.d/tor.list \
- && gpg2 --keyserver keys.gnupg.net --recv 886DDD89 \
+ && gpg2 --keyserver pgp.mit.edu --recv 886DDD89 \
  && gpg2 --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add - \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y tor deb.torproject.org-keyring \
