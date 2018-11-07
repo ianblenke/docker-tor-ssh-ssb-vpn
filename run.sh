@@ -9,6 +9,9 @@ echo "ssh_host_ip: ${ssh_host_ip}"
 echo "ssh_host_port: ${ssh_host_port}"
 
 sed -i -e 's@^#%include /etc/torrc.d/@%include /etc/torrc.d/@' /etc/tor/torrc
+if ! grep -e '^%include /etc/torrc.d/' /etc/tor/torrc ; then
+  echo '%include /etc/torrc.d/' >> /etc/tor/torrc
+fi
 
 mkdir -p /etc/torrc.d
 
