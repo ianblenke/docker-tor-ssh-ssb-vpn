@@ -8,6 +8,10 @@ ssh_host_port=${ssh_host_port:-22}
 echo "ssh_host_ip: ${ssh_host_ip}"
 echo "ssh_host_port: ${ssh_host_port}"
 
+chsh -s /bin/bash tor
+
+[ ! -f /etc/tor/torrc ] && [ -f /etc/tor/torrc.sample ] && cp -f /etc/tor/torrc.sample /etc/tor/torrc
+
 sed -i -e 's@^#%include /etc/torrc.d/@%include /etc/torrc.d/@' /etc/tor/torrc
 if ! grep -e '^%include /etc/torrc.d/' /etc/tor/torrc ; then
   echo '%include /etc/torrc.d/' >> /etc/tor/torrc

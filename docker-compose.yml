@@ -8,7 +8,10 @@ volumes:
 services:
 
   tor:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+      #dockerfile: Dockerfile.stretch
     image: sofwerx/tor
     container_name: tor
 ## Comment out the `network_mode: host` line if you want to ssh into your docker-engine host itself.
@@ -17,7 +20,7 @@ services:
     volumes:
       - tor-data:/var/lib/tor
     ports:
-      - 127.0.0.1:9050:9050
+      - 127.0.0.1:19050:9050
     restart: always
 ## Alternatively, uncomment these and point them at the host IP you wish to ssh into
 #    environment:
