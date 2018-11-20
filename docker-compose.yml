@@ -15,18 +15,24 @@ services:
     image: sofwerx/tor
     container_name: tor
     restart: always
-## By default, the container will publish the hidden service and connect to that on port 22 on the default gateway of the docker container.
-## The docker-engine host needs to have an SSH server running on port 22.
+## By default, the container will publish the hidden service and connect to 
+## that on port 22 on the default gateway of the docker container.
+## The docker-engine host needs to have an SSH server running on 
+## INADDR_ANY (0.0.0.0) port 22, or at least bound to that docker0 interface.
 #
-## Alternatively, you can uncomment these and point them at the static host IP you wish to ssh into
+## Alternatively, you can uncomment these and point them at the static host IP
+## you wish to ssh into.
 #    environment:
 #      ssh_host_ip: 172.18.0.1
 #      ssh_host_port: 22
-## You can also use this container's tor socks5 proxy on the docker-engine host on 127.0.0.1:19050 simply by uncommenting this:
+## You can also use this container's tor socks5 proxy on the docker-engine host
+## on 127.0.0.1:19050 simply by uncommenting this:
 #    ports:
 #      - 127.0.0.1:19050:9050
 #
-## Or, if you leave the above commented out, and uncomment the following commented section,  you can run the container with the docker-engine host's IP stack and connect back to SSH on 127.0.0.1:22:
+## Or, if you leave the above commented out, and uncomment the following
+## commented section,  you can run the container with the docker-engine host's
+## IP stack and connect back to SSH on 127.0.0.1:22:
 #    network_mode: host
 #    environment:
 #      ssh_host_ip: 127.0.0.1
