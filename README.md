@@ -1,21 +1,16 @@
-# docker-tor-ssh
+# docker-tor-ssh-ssb
 
-Run a tor container that publishes a hidden service that lets you ssh to the underlying docker-machine host or VM parent machine.
+Run a tor container that publishes hidden services that lets you ssh and ssb to the underlying docker-machine host or VM parent machine.
 
 # Usage:
 
-Using `docker-compose`, merely:
+Run:
 
-    docker-compose build tor
-    docker-compose up -d tor
+    make
 
 The first time you run this, a new hidden service identity will be created.
-To show the `.onion` address, restart the service and look at the logs:
 
-    docker-compose restart tor
-    docker-compose logs --tail=100 -f tor
-
-For better anonymity, this attemps to use the longer SHA-3/ed25519/curve25519 `.onion` addresses.
+For better anonymity, this project uses the longer SHA-3/ed25519/curve25519 `.onion` addresses.
 
 # Connecting:
 

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "outDir": "./dist/",
+    "lib": [
+      "es2015",
+      "dom"
+    ]
+  },
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2
+  },
+   "files": [
+     "./stub-typings/pull-stream.d.ts",
+     "./stub-typings/qr-image.d.ts",
+     "./stub-typings/scuttlebot.d.ts",
+     "./stub-typings/ssb-config.d.ts",
+     "./stub-typings/ssb-keys.d.ts",
+     "src/index.ts"
+   ]
+}

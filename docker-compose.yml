@@ -1,49 +1,41 @@
-version: '2'
+version: '3.7'
+
+networks:
+
+  tor-ssb:
+    driver: bridge
 
 volumes:
 
-  tor-data:
-    driver: local
+  tor:
+  ssb:
 
 services:
 
   tor:
-    build:
-      context: .
-      dockerfile: Dockerfile.alpine
-      #dockerfile: Dockerfile.stretch
-    image: sofwerx/tor
+    hostname: tor
     container_name: tor
-    restart: always
-## By default, the container will publish the hidden service and connect to 
-## that on port 22 on the default gateway of the docker container.
-## The docker-engine host needs to have an SSH server running on 
-## INADDR_ANY (0.0.0.0) port 22, or at least bound to that docker0 interface.
-#
-## Alternatively, you can uncomment these and point them at the static host IP
-## you wish to ssh into.
-#    environment:
-#      ssh_host_ip: 172.18.0.1
-#      ssh_host_port: 22
-## You can also use this container's tor socks5 proxy on the docker-engine host
-## on 127.0.0.1:19050 simply by uncommenting this:
-#    ports:
-#      - 127.0.0.1:19050:9050
-#
-## Or, if you leave the above commented out, and uncomment the following
-## commented section,  you can run the container with the docker-engine host's
-## IP stack and connect back to SSH on 127.0.0.1:22:
-#    network_mode: host
-#    environment:
-#      ssh_host_ip: 127.0.0.1
-#      ssh_host_port: 22
+    build: tor/
     volumes:
-      - tor-data:/var/lib/tor
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 1m
-        max-file: "1"
-        labels: tor
-        env: debian
-    
+      - tor:/var/lib/tor
+    networks:
+      - tor-ssb
+    restart: always
+
+  ssb:
+    container_name: ssb
+    hostname: ssb
+    build: ssb/
+    ports:
+      - "80:80"
+      - "8008:8008"
+      - "8007:8007"
+    volumes:
+      - ssb:/root/.ssb
+      - tor:/var/lib/tor
+    networks:
+      - tor-ssb
+    restart: always
+    depends_on:
+      -  tor
+

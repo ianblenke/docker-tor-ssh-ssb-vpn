@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine
 
 RUN apk --no-cache add tor bash shadow
 

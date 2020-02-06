@@ -1,0 +1,20 @@
+version: '2'
+
+volumes:
+  easy-ssb-pub:
+
+services:
+  easy_ssb_pub:
+    build: .
+    environment:
+      HOST: "${HOST}"
+      DEBUG: "${DEBUG}"
+    ports:
+      - "80:80"
+      - "8008:8008"
+      - "8007:8007"
+    volumes:
+      - easy-ssb-pub:/home/node/.ssb
+    container_name: easy-ssb-pub
+    mem_limit: 450M
+    restart: unless-stopped
