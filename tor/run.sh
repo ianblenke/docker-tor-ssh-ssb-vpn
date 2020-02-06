@@ -31,8 +31,6 @@ EOF
 echo "Configuration:"
 grep -v -e '^#\|^$' /etc/tor/torrc /etc/torrc.d/*
 
-grep -r . /var/lib/tor/ssb-pub/
-
 if [ -f /var/lib/tor/ssb-pub/hostname ]; then
   echo 'Onion Hostname:' $(cat /var/lib/tor/ssh-ssb/hostname)
 fi

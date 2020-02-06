@@ -22,5 +22,6 @@ cat <<EOF > $HOME/.ssb/config
 }
 EOF
 
+echo "Onion hostname: $HOST"
 
 exec npm start
