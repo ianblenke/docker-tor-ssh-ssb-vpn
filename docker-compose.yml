@@ -8,7 +8,7 @@ networks:
 volumes:
 
   tor:
-  ssb:
+  ssb-pub:
 
 services:
 
@@ -22,16 +22,16 @@ services:
       - tor-ssb
     restart: always
 
-  ssb:
-    container_name: ssb
-    hostname: ssb
-    build: ssb/
+  ssb-pub:
+    container_name: ssb-pub
+    hostname: ssb-pub
+    build: ssb-pub/
     ports:
       - "80:80"
       - "8008:8008"
       - "8007:8007"
     volumes:
-      - ssb:/root/.ssb
+      - ssb-pub:/root/.ssb
       - tor:/var/lib/tor
     networks:
       - tor-ssb
