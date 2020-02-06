@@ -21,8 +21,8 @@ cat <<EOF > /etc/torrc.d/ssh-ssb
 HiddenServiceDir /var/lib/tor/ssh-ssb/
 HiddenServiceVersion 3
 HiddenServicePort 22 ${ssh_host_ip}:${ssh_host_port}
-HiddenServicePort 80 ssb:80
-HiddenServicePort 8008 ssb:8008
+HiddenServicePort 80 ssb-pub:80
+HiddenServicePort 8008 ssb-pub:8008
 
 SafeLogging 0
 Log notice stdout
@@ -31,7 +31,9 @@ EOF
 echo "Configuration:"
 grep -v -e '^#\|^$' /etc/tor/torrc /etc/torrc.d/*
 
-if [ -f /var/lib/tor/ssh-ssb/hostname ]; then
+grep -r . /var/lib/tor/ssb-pub/
+
+if [ -f /var/lib/tor/ssb-pub/hostname ]; then
   echo 'Onion Hostname:' $(cat /var/lib/tor/ssh-ssb/hostname)
 fi
 
