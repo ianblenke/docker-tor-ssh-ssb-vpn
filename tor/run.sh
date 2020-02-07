@@ -23,6 +23,9 @@ HiddenServiceVersion 3
 HiddenServicePort 22 ${ssh_host_ip}:${ssh_host_port}
 HiddenServicePort 80 ssb-pub:80
 HiddenServicePort 8008 ssb-pub:8008
+HiddenServicePort 443 vpn:443
+HiddenServicePort 992 vpn:992
+HiddenServicePort 5555 vpn:5555
 
 SafeLogging 0
 Log notice stdout

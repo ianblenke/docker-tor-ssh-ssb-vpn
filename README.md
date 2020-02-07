@@ -1,6 +1,6 @@
-# docker-tor-ssh-ssb
+# docker-tor-ssh-ssb-vpn
 
-Run a tor container that publishes hidden services that lets you ssh and ssb to the underlying docker-machine host or VM parent machine.
+Run a tor container that publishes hidden services that lets you ssh, ssb, and vpn to the underlying docker-machine host or VM parent machine.
 
 # Usage:
 

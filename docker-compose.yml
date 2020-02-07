@@ -39,3 +39,28 @@ services:
     depends_on:
       -  tor
 
+  vpn:
+    build: vpn/
+    container_name: vpn
+    hostname: vpn
+    ports:
+      - "500:500/udp"   # IPSEC IKE
+      - "443:443/tcp"   # HTTPS/Admin
+      - "992:992/udp"   # ?
+      - "992:992/tcp"   # ?
+      - "1194:1194/udp" # OpenVPN data
+      - "1194:1194/tcp" # OpenVPN control
+      - "1701:1701/udp" # L2TP data
+      - "1701:1701/tcp" # L2TP control
+      - "4500:4500/udp" # IPSEC NAT-T data
+      - "5555:5555/tcp" # ?
+    environment:
+      PSK: ${PSK}
+      USERNAME: ${USERNAME}
+      PASSWORD: ${PASSWORD}
+    networks:
+      - tor-ssb
+    restart: always
+    depends_on:
+      -  ssb-pub
+
