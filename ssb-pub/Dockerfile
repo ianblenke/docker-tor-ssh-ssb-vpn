@@ -8,12 +8,9 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y curl libc6 libcurl3 zlib1g libtool autoconf libleveldb-dev
 
-RUN git clone https://github.com/jedisct1/libsodium.git \
+RUN git clone -b stable https://github.com/jedisct1/libsodium.git \
  && cd libsodium \
- && git checkout \
- && ./autogen.sh  \
  && ./configure \
- && make \
  && make check \
  && make install
 
